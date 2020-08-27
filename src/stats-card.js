@@ -4,9 +4,9 @@ const {
   NAMECOLOR,
   Card,
   renderError,
+  renderTag,
   renderCCFBadge,
-  renderChart,
-  renderTag
+  renderChart
 } = require("./common.js")
 
 /**
@@ -24,7 +24,7 @@ async function fetchStats(id) {
     passed: [0,0,0,0,0,0,0,0],
     hideInfo: false,
     hasTag: false,
-    tag: null
+    tag: ""
   }
   if(res.data.code !== 200) {
     return stats;
@@ -37,7 +37,7 @@ async function fetchStats(id) {
   stats.color = user.color;
   stats.ccfLevel = user.ccfLevel;
   stats.hasTag = (user.badge != null);
-  stats.tag = user.badge;
+  stats.tag = hasTag ? user.badge : "";
 
   if(!passed) {
     stats.hideInfo = true;

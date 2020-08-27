@@ -164,6 +164,7 @@ module.exports = {
   NAMECOLOR,
   Card,
   renderError,
+  renderTag,
   renderCCFBadge,
   renderChart,
 };
