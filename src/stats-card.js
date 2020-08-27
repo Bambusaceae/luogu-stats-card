@@ -21,7 +21,9 @@ async function fetchStats(id) {
     color: "Gray",
     ccfLevel: 0,
     passed: [0,0,0,0,0,0,0,0],
-    hideInfo: false
+    hideInfo: false,
+    hasTag: false,
+    tag: null
   }
   if(res.data.code !== 200) {
     return stats;
@@ -33,6 +35,8 @@ async function fetchStats(id) {
   stats.name = user.name;
   stats.color = user.color;
   stats.ccfLevel = user.ccfLevel;
+  stats.hasTag = (user.tag != null);
+  stats.tag = user.tag;
 
   if(!passed) {
     stats.hideInfo = true;
@@ -52,7 +56,9 @@ const renderSVG = (stats, options) => {
     color,
     ccfLevel,
     passed,
-    hideInfo
+    hideInfo,
+    hasTag,
+    tag
   } = stats;
 
   const { 
@@ -69,6 +75,7 @@ const renderSVG = (stats, options) => {
   const labelWidth = 90;  //头部文字长度
   const progressWidth = cardWidth - 2*paddingX - labelWidth - 60; //500 - 25*2(padding) - 90(头部文字长度) - 60(预留尾部文字长度)，暂时固定，后序提供自定义选项;
   const nameLength = anafanafo(name)/10*1.8; //计算字体大小为18pt的文本长度
+  const tagLength = hasTag ? anafanafo(tag)/10*1.8+10 : -5;
 
   const datas = [
     {label: "未评定", color:"#bfbfbf", data: passed[0]},
@@ -89,7 +96,8 @@ const renderSVG = (stats, options) => {
     <text x="0" y="0" fill="${NAMECOLOR[color]}" font-weight="bold" textLength="${nameLength}">
       ${name}
     </text>
-    ${ccfLevel < 3 ? "" : renderCCFBadge(ccfLevel, nameLength + 5)}
+    ${hasTag ? renderTag(tag, NAMECOLOR[color], nameLength + 5) : ""}
+    ${ccfLevel < 3 ? "" : renderCCFBadge(ccfLevel, nameLength + tagLength + 10)}
     <text x="${nameLength + (ccfLevel < 3 ? 10 : 28)}" y="0" fill="${textColor}" font-weight="normal">
       的练习情况
     </text>

@@ -108,6 +108,21 @@ const renderCCFBadge = (level, x) => {
 }
 
 /**
+ * 渲染 tag
+ * @param {string} content tag的内容
+ * @param {string} color tag的颜色
+ * @param {number} x tag的x坐标
+ * @returns {string} tag的svg字符串
+ */
+const renderTag = (content, color, x) => {
+  const len = anafanafo(content)/10*1.8
+  return `
+  <svg xmlns="http://www.w3.org/2000/svg" x="${x}" y="-14" width="${len+10}" height="18" viewBox="0 0 18 18">
+    <rect rx="2" ry="2" fill="${color}" width="${len+10}" height="18"></rect>
+  </svg>`
+}
+
+/**
  * 渲染柱状图
  * @param {Object[]} datas 柱状图的数据数组
  * @param {string} datas.label 一条数据的标签
