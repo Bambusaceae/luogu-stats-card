@@ -1,3 +1,5 @@
+const anafanafo = require('anafanafo')
+
 const NAMECOLOR = {
   "Gray": "#bbbbbb",
   "Blue": "#0e90d2",
