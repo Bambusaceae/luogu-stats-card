@@ -6,6 +6,7 @@ const {
   renderError,
   renderCCFBadge,
   renderChart,
+  renderTag
 } = require("./common.js")
 
 /**
