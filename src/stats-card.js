@@ -35,8 +35,8 @@ async function fetchStats(id) {
   stats.name = user.name;
   stats.color = user.color;
   stats.ccfLevel = user.ccfLevel;
-  stats.hasTag = (user.tag != null);
-  stats.tag = user.tag;
+  stats.hasTag = (user.badge != null);
+  stats.tag = user.badge;
 
   if(!passed) {
     stats.hideInfo = true;
